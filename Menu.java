@@ -65,25 +65,22 @@ public class Menu {
         String document = JOptionPane.showInputDialog("Ingrese documento:");
         String passwordD = JOptionPane.showInputDialog("Ingrese contraseña:");
         BankAccount account = searchAccount(document);
-
-        if (comparePassword(passwordD, decryptPassword(account.getPassword()))) {
+    
+        if (account != null && comparePassword(passwordD, decryptPassword(account.getPassword()))) {
             JOptionPane.showMessageDialog(null, "Iniciando sesión...");
             JOptionPane.showMessageDialog(null, "Bienvenido " + account.getName()+"\n"+
                     "Saldo: " + account.getBalance()+"\n"+
                     "Documento: " + account.getDocument()+"\n"+
                     "Tipo de cuenta: " + account.getAccountType());
-        } 
-        else 
-        {
-            if (searchAccount(document) == null) 
-            {
+        } else {
+            if (account == null) {
                 JOptionPane.showMessageDialog(null, "El documento ingresado no existe.");
-            } else 
-            {
+            } else {
                 JOptionPane.showMessageDialog(null, "Contraseña incorrecta.");
             }
         }
     }
+    
 
     public static BankAccount searchAccount(String document) 
     {
