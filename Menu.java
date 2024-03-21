@@ -80,25 +80,28 @@ public class Menu {
         }
     }
 
-    public static String searchAccount(String document) {
+    public static String searchAccount(String document) 
+    {
         try {
             BufferedReader reader = new BufferedReader(new FileReader("cuentas.txt"));
             String line;
-            while ((line = reader.readLine()) != null) 
-            {
+            while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(",");
                 String storedDocument = parts[2].trim();
-                String storedPassword = parts[4].trim();
-                if (storedDocument.equals(document))
-                {
+                if (storedDocument.equals(document)) {
                     reader.close();
-                    return storedPassword;
+                    // Construir un objeto BankAccount con los datos y devolverlo
+                    return new BankAccount(
+                            parts[0].trim(), // Nombre
+                            Double.parseDouble(parts[1].trim()), // Saldo
+                            storedDocument, // Documento
+                            parts[3].trim(), // Tipo de cuenta
+                            parts[4].trim() // Contraseña
+                    );
                 }
             }
             reader.close();
-        } 
-        catch (IOException e) 
-        {
+        } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Error al leer el archivo.");
             e.printStackTrace();
         }
