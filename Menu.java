@@ -116,14 +116,16 @@ public class Menu {
         return password.equals(savedPassword);
     }
 
-    public static String encryptPassword(String password) 
+    public static String encryptPassword(String passwordDesencriptada) 
     {
-        return password;
+        String passwordEncriptada = passwordDesencriptada;
+        return passwordEncriptada;
     }
 
-    public static String decryptPassword(String password) 
+    public static String decryptPassword(String passwordEncriptada) 
     {
-        return password;
+        String passwordDesencriptada = passwordEncriptada;
+        return passwordDesencriptada;
     }
 }
 
