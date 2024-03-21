@@ -47,20 +47,6 @@ public class Menu {
         saveAccountInfo(account);
     }
 
-    public static void saveAccountInfo(BankAccount account) 
-    {
-        try 
-        {
-            BufferedWriter writer = new BufferedWriter(new FileWriter("cuentas.txt", true));
-            writer.write(account.getName() + "," + account.getBalance() + "," + account.getDocument() + "," + account.getAccountType() + "," + account.getPassword() + "\n");
-            writer.close();
-            JOptionPane.showMessageDialog(null, "La cuenta se ha creado y guardado correctamente ");
-        } catch (IOException e) 
-        {
-            JOptionPane.showMessageDialog(null, "Error al guardar la cuenta en el archivo.");
-        }
-    }
-
     public static void login() {
         String document = JOptionPane.showInputDialog("Ingrese documento:");
         String passwordD = JOptionPane.showInputDialog("Ingrese contraseña:");
@@ -80,7 +66,35 @@ public class Menu {
             }
         }
     }
-    
+
+    public static String encryptPassword(String passwordDesencriptada) 
+    {
+        String passwordEncriptada = passwordDesencriptada;
+        return passwordEncriptada;
+    }
+
+    public static String decryptPassword(String passwordEncriptada) 
+    {
+        String passwordDesencriptada = passwordEncriptada;
+        return passwordDesencriptada;
+    }
+//===============================================================================
+//AUXILIARES
+    public static void saveAccountInfo(BankAccount account) 
+    {
+        try 
+        {
+            BufferedWriter writer = new BufferedWriter(new FileWriter("cuentas.txt", true));
+            writer.write(account.getName() + "," + account.getBalance() + "," + account.getDocument() + "," + account.getAccountType() + "," + account.getPassword() + "\n");
+            writer.close();
+            JOptionPane.showMessageDialog(null, "La cuenta se ha creado y guardado correctamente ");
+        } catch (IOException e) 
+        {
+            JOptionPane.showMessageDialog(null, "Error al guardar la cuenta en el archivo.");
+        }
+    }
+
+   
 
     public static BankAccount searchAccount(String document) 
     {
@@ -116,17 +130,7 @@ public class Menu {
         return password.equals(savedPassword);
     }
 
-    public static String encryptPassword(String passwordDesencriptada) 
-    {
-        String passwordEncriptada = passwordDesencriptada;
-        return passwordEncriptada;
-    }
-
-    public static String decryptPassword(String passwordEncriptada) 
-    {
-        String passwordDesencriptada = passwordEncriptada;
-        return passwordDesencriptada;
-    }
+  
 }
 
 
