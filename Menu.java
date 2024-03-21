@@ -64,9 +64,14 @@ public class Menu {
     public static void login() {
         String document = JOptionPane.showInputDialog("Ingrese documento:");
         String passwordD = JOptionPane.showInputDialog("Ingrese contraseña:");
+        BankAccount account = searchAccount(document);
 
-        if (comparePassword(passwordD, decryptPassword(searchAccount(document)))) {
+        if (comparePassword(passwordD, decryptPassword(account.getPassword()))) {
             JOptionPane.showMessageDialog(null, "Iniciando sesión...");
+            JOptionPane.showMessageDialog(null, "Bienvenido " + account.getName()+"\n"+
+                    "Saldo: " + account.getBalance()+"\n"+
+                    "Documento: " + account.getDocument()+"\n"+
+                    "Tipo de cuenta: " + account.getAccountType());
         } 
         else 
         {
@@ -80,7 +85,7 @@ public class Menu {
         }
     }
 
-    public static String searchAccount(String document) 
+    public static BankAccount searchAccount(String document) 
     {
         try {
             BufferedReader reader = new BufferedReader(new FileReader("cuentas.txt"));
@@ -92,11 +97,11 @@ public class Menu {
                     reader.close();
                     // Construir un objeto BankAccount con los datos y devolverlo
                     return new BankAccount(
-                            parts[0].trim(), // Nombre
-                            Double.parseDouble(parts[1].trim()), // Saldo
-                            storedDocument, // Documento
-                            parts[3].trim(), // Tipo de cuenta
-                            parts[4].trim() // Contraseña
+                            parts[0].trim(), // nombre
+                            Double.parseDouble(parts[1].trim()), // saldo
+                            storedDocument, // documento
+                            parts[3].trim(), // tipo de cuenta
+                            parts[4].trim() // contraseña
                     );
                 }
             }
@@ -107,6 +112,7 @@ public class Menu {
         }
         return null;
     }
+    
 
     public static boolean comparePassword(String password, String savedPassword) 
     {
